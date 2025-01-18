@@ -1,14 +1,9 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% if title %}
-    <title>Django Recipes - {{ title }}</title>
-    {% else %}
     <title>Django Recipes</title>
-    {% endif %}
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,7 +12,7 @@
     />
     <style>
       body {
-          background-image: url("{% static "images/backround5.jpg" %}");
+          background-image: url("/images/backround5.jpg");
           background-size: cover; 
           background-position: center; 
           background-repeat: no-repeat;
@@ -25,17 +20,14 @@
 
       .card {
         background-color: #FDF5E6;
-        background-size: cover; 
-        background-position: center;
-        background-repeat: no-repeat;
-        border: 10px solid #FFDEAD	
-    }
+        border: 10px solid #FFDEAD;
+      }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="{% url 'recipes-home' %}">Recipes App</a>
+        <a class="navbar-brand" href="/index.html">Recipes App</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -50,37 +42,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'recipes-home' %}">Recipes</a>
+              <a class="nav-link" href="/index.html">Recipes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'recipes-about' %}">About</a>
+              <a class="nav-link" href="/templates/about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'recipes-create' %}">Add Recipe</a>
+              <a class="nav-link" href="/templates/add_recipe.html">Add Recipe</a>
             </li>
           </ul>
         </div>
         <div class="navbar-nav">
-          {% if user.is_authenticated %}
-          <a class="nav-item nav-link" href="{% url 'user-profile' %}">My Profile</a>
-          <form method="POST" action="{% url 'user-logout' %}" class="nav-item">
-              {% csrf_token %}
-              <button type="submit" class="nav-link btn btn-link" style="display:inline;">Logout</button>
-          </form>
-          {% else %}
-          <a class="nav-item nav-link" href="{% url 'user-login' %}">Login</a>
-          <a class="nav-item nav-link" href="{% url 'user-register' %}">Register</a>
-          {% endif %}
+          <a class="nav-item nav-link" href="/templates/login.html">Login</a>
+          <a class="nav-item nav-link" href="/templates/register.html">Register</a>
         </div>
       </div>
     </nav>
     <div class="container mt-4 col-8">
-      {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-      {% block content %}{% endblock %}
+      <!-- Static content goes here -->
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -89,3 +68,4 @@
     ></script>
 </body>
 </html>
+
